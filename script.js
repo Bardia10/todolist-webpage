@@ -16,15 +16,19 @@ window.onload = function() {
 
 };
 
-function taskNumber(){
-  let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-  let number = Object.keys(tasks).length;
-  return number + 1;
+function getNumber(){
+  let number = JSON.parse(sessionStorage.getItem('highNumber')) || 0;
+  number = parseInt(number)
+  return number + 1 ;
 }
+
 function saveTask(task,number){
     let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
     tasks[number]= task;
     sessionStorage.setItem('tasks',JSON.stringify(tasks));
+    sessionStorage.setItem('highNumber',JSON.stringify(number));
+    number++;
+    
 }
 
 function getTask(number) {
@@ -33,16 +37,18 @@ function getTask(number) {
     return tasks[taskKey];
   }
 
-// function delTask(number){
-  
-// }
+function delTask(number){
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  delete tasks[number];
+  sessionStorage.setItem('tasks',JSON.stringify(tasks));
+
+}
   
 addButton.addEventListener('click', addInput);
 function addInput() {
     let task = taskInput.value;
     if (task !== '') {
-        console.log('Task added:', task);
-        let number = taskNumber();
+        let number = getNumber();
         addTask(task, number)
         taskInput.value = ''; 
     }
@@ -70,44 +76,44 @@ function enterAdd(event){
 
 taskList.addEventListener('click', (event) => {
   const target = event.target;
-  const liElement = target.parentElement.parentElement
   const taskTextDiv = target.parentElement.parentElement.querySelector('.taskText');
 
   if (target.classList.contains('editButton')) {
     // Handle the edit button click
     let number = taskTextDiv.getAttribute('data-number');
+    let liElement = target.parentElement.parentElement
     const currentText = taskTextDiv.textContent;
     let editBar = `
-    <input type="text" class="editInput" value="${currentText}">
-    <button class="applyButton">Apply</button>
+    <input type="text" class="editInput" value="${currentText}" >
+    <button class="applyButton" data-number=${number}>Apply</button>
 `
     liElement.innerHTML = editBar
-    console.log(currentText);
   } else if (target.classList.contains('deleteButton')) {
     let number = taskTextDiv.getAttribute('data-number');
+    let liElement = target.parentElement.parentElement
     const taskItem = target.closest('li'); // Find the parent <li> element
     if (taskItem) {
       taskItem.remove();
-
-  }}
+    delTask(number);
+  }} else if (target.classList.contains('applyButton')) {
+    let number = target.getAttribute('data-number');
+    let liElement = target.parentElement
+    const taskItem = target.closest('li'); // Find the parent <li> element
+    let inputBar = liElement.querySelector('input')
+    let editedItem=inputBar.value
+    editTask(editedItem, number,liElement)
+  }
 });
-// const editButtons = document.querySelectorAll('.editButton');
 
-// editButtons.forEach(button => {
-//   button.addEventListener('click', () => {
-//     edit(button);
-//   });
-// });
-// function edit(button) {
-//   let taskTextDiv = button.parentElement.parentElement.querySelector('.taskText');
-//   let currentText = taskTextDiv.textContent;
-//   console.log(currentText);
-// }
-// // deleteButton.addEventListener('click', () => {
-//     const task = taskInput.value;
-//     if (task !== '') {
-//         console.log('Task added:', task);
-        
-//         taskInput.value = ''; 
-//     }
-// });
+function editTask(newTask,number,liElement){
+    let editedItem = `
+        <div class="taskText" data-number="${number}">${newTask}</div>
+        <div class="taskButtons">
+            <button class="editButton">Edit</button>
+            <button class="deleteButton">Delete</button>
+            <input type="checkbox" class="completeButton">
+        </div>
+`
+    liElement.innerHTML = editedItem
+    saveTask(newTask,number)
+}
