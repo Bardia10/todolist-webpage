@@ -14,7 +14,7 @@
 #addButton {
     padding: 5px 10px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: #e1ed5ab4;
     cursor: pointer;
 }
 
@@ -27,7 +27,6 @@
 
 
 #taskListContainer {
-    border: 1px solid black;
     padding: 10px;
 }
 
@@ -46,6 +45,7 @@ li {
 .taskText {
     flex-grow: 1;
     text-align: left;
+    color: rgb(71, 81, 186);
 }
 
 .taskButtons {
@@ -81,12 +81,8 @@ li {
 h1 {
     font-family: Helvetica, sans-serif;
     font-weight: bold;
-    color: rgb(169, 213, 255); /* Or any color you prefer */
-    background-color: #0000005f;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    padding:2px 10px;
+    color: rgb(110, 183, 251); /* Or any color you prefer */
+
   }
 
 body {
@@ -112,7 +108,7 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  width: 100%;
   text-align: center;
 }
 #taskListContainer {
@@ -121,7 +117,7 @@ h1 {
     padding-top: 0;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 100%;
     text-align: center;
   }
   
@@ -139,3 +135,35 @@ h2 {
   padding: 0;
 }
 
+.content-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    text-align: center;
+    display: flex; /* Make the content-box a flex container */
+    flex-direction: column; /* Arrange content vertically */
+    align-items: center; /* Center content horizontally */
+    margin-top: 20px;
+    font-weight: bold;
+  }
+#taskListContainer {
+  width: 100%;
+  max-width: 580px; /* Set a maximum width for the task list container */
+}
+#addTaskContainer {
+    width: 100%;
+    max-width: 590px; /* Set a maximum width for the task list container */
+  }
+
+button {
+  color :rgb(255, 255, 255)
+}
+
+input{
+    color: rgb(43, 9, 59);
+    font-weight: bold;
+}
