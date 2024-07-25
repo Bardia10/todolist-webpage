@@ -18,6 +18,12 @@
     cursor: pointer;
 }
 
+#applyButton {
+    padding: 5px 10px;
+    border: none;
+    background-color: #2ae653;
+    cursor: pointer;
+}
 
 
 #taskListContainer {
