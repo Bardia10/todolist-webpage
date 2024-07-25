@@ -45,3 +45,30 @@ li {
     display: flex;
     align-items: center;
 }
+
+.editButton, .deleteButton {
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    margin: 0 5px; /* Add margin to buttons */
+}
+
+.completeButton {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    border: 2px solid green;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.completeButton:checked {
+    background-color: green;
+}
+
+
