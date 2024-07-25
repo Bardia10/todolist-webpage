@@ -7,6 +7,15 @@ const taskInput = document.getElementById('taskInput');
 const editInput = document.getElementById('editInput');
 const taskList = document.getElementById('taskList')
 
+
+window.onload = function() {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'))||{};
+  for (const [number, task] of Object.entries(tasks)) {
+    addTask(task,number)
+  }
+
+};
+
 function taskNumber(){
   let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
   let number = Object.keys(tasks).length;
@@ -23,14 +32,24 @@ function getTask(number) {
     let taskKey = String(number); 
     return tasks[taskKey];
   }
+
+// function delTask(number){
   
-addButton.addEventListener('click', addTask);
-function addTask() {
+// }
+  
+addButton.addEventListener('click', addInput);
+function addInput() {
     let task = taskInput.value;
     if (task !== '') {
         console.log('Task added:', task);
         let number = taskNumber();
-        const newItem = `<li>
+        addTask(task, number)
+        taskInput.value = ''; 
+    }
+}
+
+function addTask(task, number){
+  const newItem = `<li>
         <div class="taskText" data-number="${number}">${task}</div>
         <div class="taskButtons">
             <button class="editButton">Edit</button>
@@ -38,32 +57,53 @@ function addTask() {
             <input type="checkbox" class="completeButton">
         </div>
         </li>`;
-        taskInput.value = ''; 
-        taskList.insertAdjacentHTML('beforeend',newItem);
-        saveTask(task,number);
-        let tsk = getTask(number);
-    }
+  taskInput.value = ''; 
+  taskList.insertAdjacentHTML('beforeend',newItem);
+  saveTask(task,number)
 }
 
 function enterAdd(event){
   if (event.key==='Enter'){
-    addTask()
+    addInput()
   }
 }
 
-const editButtons = document.querySelectorAll('.editButton');
+taskList.addEventListener('click', (event) => {
+  const target = event.target;
+  const liElement = target.parentElement.parentElement
+  const taskTextDiv = target.parentElement.parentElement.querySelector('.taskText');
+
+  if (target.classList.contains('editButton')) {
+    // Handle the edit button click
+    let number = taskTextDiv.getAttribute('data-number');
+    const currentText = taskTextDiv.textContent;
+    let editBar = `
+    <input type="text" class="editInput" value="${currentText}">
+    <button class="applyButton">Apply</button>
+`
+    liElement.innerHTML = editBar
+    console.log(currentText);
+  } else if (target.classList.contains('deleteButton')) {
+    let number = taskTextDiv.getAttribute('data-number');
+    const taskItem = target.closest('li'); // Find the parent <li> element
+    if (taskItem) {
+      taskItem.remove();
+
+  }}
+});
+// const editButtons = document.querySelectorAll('.editButton');
 
 // editButtons.forEach(button => {
 //   button.addEventListener('click', () => {
-//     const taskTextDiv = button.parentElement.parentElement.querySelector('.taskText');
-//     const currentText = taskTextDiv.textContent;
-//     if (newText !== null) {
-//       taskTextDiv.textContent = newText;
-//     }
+//     edit(button);
 //   });
 // });
-
-// deleteButton.addEventListener('click', () => {
+// function edit(button) {
+//   let taskTextDiv = button.parentElement.parentElement.querySelector('.taskText');
+//   let currentText = taskTextDiv.textContent;
+//   console.log(currentText);
+// }
+// // deleteButton.addEventListener('click', () => {
 //     const task = taskInput.value;
 //     if (task !== '') {
 //         console.log('Task added:', task);

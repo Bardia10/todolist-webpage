@@ -5,7 +5,7 @@
     width: 100%; /* Make the container full width */
 }
 
-#taskInput {
+#taskInput , .editInput {
     flex-grow: 1;
     margin-right: 10px;
     padding: 5px;
@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-#applyButton {
+.applyButton {
     padding: 5px 10px;
     border: none;
     background-color: #2ae653a0;
