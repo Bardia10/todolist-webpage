@@ -167,3 +167,22 @@ input{
     color: rgb(43, 9, 59);
     font-weight: bold;
 }
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#addTaskContainer {
+  width: 100%;
+  max-width: 100%; /* Change max-width to 100% */
+}
+
+#taskListContainer {
+  width: 100%;
+  max-width: 100%; /* Change max-width to 100% */
+}
+
+.content-box {
+  width: 100%;
+  max-width: 100%; /* Change max-width to 100% */
+}
