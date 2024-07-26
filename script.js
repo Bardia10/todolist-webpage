@@ -29,9 +29,7 @@ function saveTask(task,number){
   let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
   tasks[number]= task;
   sessionStorage.setItem('tasks',JSON.stringify(tasks));
-  sessionStorage.setItem('highNumber',JSON.stringify(number));
-  number++;
-  
+  sessionStorage.setItem('highNumber',JSON.stringify(number));  
 }
 
 
@@ -110,10 +108,14 @@ function editTask(newTask,number,liElement){
         </div>
 `
     liElement.innerHTML = editedItem
-    saveTask(newTask,number)
+    updateTask(newTask,number)
 }
 
-
+function updateTask(task, number){
+  let tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
+  tasks[number]= task;
+  sessionStorage.setItem('tasks',JSON.stringify(tasks));
+}
 
 
 
