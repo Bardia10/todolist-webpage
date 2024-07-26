@@ -173,16 +173,16 @@ body {
 }
 
 #addTaskContainer {
-  width: 100%;
-  max-width: 100%; /* Change max-width to 100% */
+  width: 90%;
+  max-width: 90%; /* Change max-width to 100% */
 }
 
 #taskListContainer {
-  width: 100%;
-  max-width: 100%; /* Change max-width to 100% */
+  width: 90%;
+  max-width: 90%; /* Change max-width to 100% */
 }
 
 .content-box {
-  width: 100%;
-  max-width: 100%; /* Change max-width to 100% */
+  width: 650px;
+  max-width: 85%; /* Change max-width to 100% */
 }
